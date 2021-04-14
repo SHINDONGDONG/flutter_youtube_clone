@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_youtube/controller/app_controller.dart';
+import 'package:flutter_youtube/src/pages/explore.dart';
+import 'package:flutter_youtube/src/pages/home.dart';
+import 'package:flutter_youtube/src/pages/library.dart';
+import 'package:flutter_youtube/src/pages/subs.dart';
 import 'package:get/get.dart';
+
+import 'controller/app_controller.dart';
 
 //가장 루트경로가 되는 페이지
 class App extends GetView<AppController> { //Getview에 Appcontroller를 넣어줌으로써 컨트롤러를 무조건 사용가능
@@ -10,9 +15,30 @@ class App extends GetView<AppController> { //Getview에 Appcontroller를 넣어�
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('AppTitle'),
-      ),                   //Obx로 유연한 상태관리 적용
+      body: SafeArea(
+        child: Obx((){
+          // ignore: missing_return, missing_return
+          //Enum Type으로 정확하게 넣어줌.
+          switch(RouteName.values[controller.currentIndex.value]){
+            case RouteName.Home:
+              return Home();
+              break;
+            case RouteName.Explore:
+              return Explore();
+              break;
+              break;
+            case RouteName.Subs:
+              return Subs();
+              break;
+            case RouteName.Labrary:
+              return Labrary();
+              break;
+            case RouteName.Add:
+              break;
+          }
+          return Container(); //아무것도 아닐때
+        }),  //바텀네비게이션 커런트에 홈이 오기때문에 HomePage를 첫번째로 넣어준다.
+      ),                  //Obx로 유연한 상태관리 적용
       bottomNavigationBar: Obx(()=>BottomNavigationBar(
         type: BottomNavigationBarType.fixed,//타입은  fixed
         currentIndex: controller.currentIndex.value, //컨트롤러에 있던 currentindex의 밸류값을 가져옴
@@ -35,9 +61,6 @@ class App extends GetView<AppController> { //Getview에 Appcontroller를 넣어�
           buildBottomNavigationBarItem('보관함','library'),
         ],
       ),
-      ),
-      body: SafeArea(
-        child: Container(),
       ),
     );
   }

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_youtube/binding/init_binding.dart';
 import 'package:flutter_youtube/src/app.dart';
+import 'package:flutter_youtube/src/binding/init_binding.dart';
+import 'package:flutter_youtube/src/pages/explore.dart';
+import 'package:flutter_youtube/src/pages/home.dart';
+import 'package:flutter_youtube/src/pages/library.dart';
+import 'package:flutter_youtube/src/pages/subs.dart';
 import 'package:get/get.dart';
 
 void main()=>runApp(MyApp());
@@ -21,6 +25,11 @@ class MyApp extends StatelessWidget {
       getPages: [
         //겟페이지에서 "/" 로 이동하면 App Page로 이동하게됨
         GetPage(name: "/", page: ()=>App()),
+        GetPage(name: "/Home", page: ()=>Home()),
+        GetPage(name: "/Explore", page: ()=>Explore()),
+        GetPage(name: "/Subs", page: ()=>Subs()),
+        GetPage(name: "/Labrary", page: ()=>Labrary()),
+
       ],
       );
   }
