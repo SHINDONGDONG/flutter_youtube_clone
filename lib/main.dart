@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_youtube/src/app.dart';
 import 'package:flutter_youtube/src/binding/init_binding.dart';
+import 'package:flutter_youtube/src/components/youtube_detail.dart';
 import 'package:flutter_youtube/src/pages/explore.dart';
 import 'package:flutter_youtube/src/pages/home.dart';
 import 'package:flutter_youtube/src/pages/library.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/Explore", page: ()=>Explore()),
         GetPage(name: "/Subs", page: ()=>Subs()),
         GetPage(name: "/Labrary", page: ()=>Labrary()),
-
+        GetPage(name: "/detail/:videoId", page: ()=>YoutubeDetail()),
+                    //detail 페이지로 넘길 때 videoId도 같이 넘겨줌 :videoId
       ],
       );
   }
