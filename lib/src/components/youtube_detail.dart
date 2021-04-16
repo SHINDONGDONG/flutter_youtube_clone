@@ -62,6 +62,36 @@ class YoutubeDetail extends StatelessWidget {
     );
   }
 
+  Widget _ownerZone(){
+    return Container(
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: CircleAvatar(
+              radius: 30,
+              backgroundColor: Colors.grey.withOpacity(0.5),
+              backgroundImage: Image.network("https://yt3.ggpht.com/ytc/AAUvwniU0ZOGv47lDdGSQ8H004fQgwOAJRlobuCvXwNl=s48-c-k-c0x00ffffff-no-rj").image,
+            ),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text('개발하는남자',style: TextStyle(fontSize: 18),),
+                Text('구독자 555',style: TextStyle(fontSize: 14,color: Colors.black.withOpacity(0.6)),),
+              ],
+            ),
+          ),
+          TextButton(
+            onPressed: (){},
+            child: Text('구독',style: TextStyle(fontSize: 15,color: Colors.red),),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _description() {
     //내용이 길어지면 스크롤이 가능하도록 싱글차일드 스크롤뷰로 리턴해줌
     return SingleChildScrollView(
@@ -71,7 +101,8 @@ class YoutubeDetail extends StatelessWidget {
           Divider(indent: 10,endIndent: 10,),
           _descriptionZone(),
           _buttonZone(),
-          Divider(indent: 10,endIndent: 10,),
+          Divider(indent: 10,endIndent: 10,height: 30,),
+          _ownerZone(),
         ],
       ),
     );

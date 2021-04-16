@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_youtube/src/components/custom_appbar.dart';
 import 'package:flutter_youtube/src/components/video_widget.dart';
+import 'package:flutter_youtube/src/pages/subs.dart';
 import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
