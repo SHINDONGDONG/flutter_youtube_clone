@@ -1,15 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_youtube/src/components/custom_appbar.dart';
 import 'package:flutter_youtube/src/components/video_widget.dart';
+import 'package:flutter_youtube/src/controller/home_controller.dart';
 import 'package:flutter_youtube/src/pages/subs.dart';
 import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
+
+  final HomeCotroller controller = Get.put(HomeCotroller());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       //Sliver 사용할때는 스크롤 뷰로 먼저 선언
-      child: CustomScrollView(
+      child: Obx(()=>CustomScrollView(
         slivers: [
           SliverAppBar(
             //슬리버는 액션이 나오는 앱바이기때문에 기본적으로 스크롤업
@@ -25,7 +30,8 @@ class Home extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
                 (context,index){
                   return GestureDetector(
-                    child: VideoWidget(),
+                    //Home 더미 화면에 실제 비디오를 넘겨준다.
+                    child: VideoWidget(video : controller.youtubeRestul.value.items[index]),
                     //클릭시 Route이동
                     onTap: (){
                       //Gettonamed로 보내지만 임의로 아이디를 보냄
@@ -33,11 +39,12 @@ class Home extends StatelessWidget {
                     },
                   );
                 },
-              childCount: 10, //리스트의 수
+              childCount: controller.youtubeRestul.value.items == null ? 0:
+              controller.youtubeRestul.value.items.length, //리스트의 수
             ),
           ),
         ],
-      ),
+      ),)
     );
   }
 }

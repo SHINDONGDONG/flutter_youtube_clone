@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_youtube/src/models/video.dart';
+import 'package:intl/intl.dart';
 class VideoWidget extends StatelessWidget {
+  final Video video;
+
+  const VideoWidget({Key key, this.video}) : super(key: key);
+
   Widget _thumbnail() {
     return Container(
+      //이미지를 네트워크로 가져와 (video.snippet.thumbnails 섬네일 url 중간사이즈)
+      child: Image.network(video.snippet.thumbnails.medium.url,fit: BoxFit.fitWidth,),
       height: 250,
       color: Colors.grey.withOpacity(0.5),
     );
@@ -31,8 +38,7 @@ class VideoWidget extends StatelessWidget {
                     children: [
                       //Expanded로 영역을 지정해주어 자동으로 줄바꿈이 되도록함.
                       Expanded(
-                        child: Text('개남 유튜브 어쩌구저쩌구개남 유튜브 어쩌구저쩌구개남 유튜브 '
-                            '어쩌구저쩌구개남 유튜브 어쩌구저쩌구개남 유튜브 어쩌구저쩌구개남 유튜브 어쩌구저쩌구',
+                        child: Text('${video.snippet.title}',
                         maxLines: 2,overflow: TextOverflow.ellipsis,),
                         //줄이 아무리 길어도 2줄만 나오도록 만들고
                       ),
@@ -50,11 +56,12 @@ class VideoWidget extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Text('갭라남자',style: TextStyle(fontSize: 12,color: Colors.black.withOpacity(0.8)),),
+                      Text(video.snippet.channelTitle,style: TextStyle(fontSize: 12,color: Colors.black.withOpacity(0.8)),),
                       Text('・'),
                       Text('조회수 1000회',style: TextStyle(fontSize: 12,color: Colors.black.withOpacity(0.6)),),
                       Text('・'),
-                      Text('2021-04-14',style: TextStyle(fontSize: 12,color: Colors.black.withOpacity(0.6)),),
+                      Text(
+                        DateFormat("yyyy-MM-dd").format(video.snippet.publishedAt) ,style: TextStyle(fontSize: 12,color: Colors.black.withOpacity(0.6)),),
                     ],
                   ),
                 ],
